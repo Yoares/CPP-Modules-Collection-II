@@ -1,6 +1,6 @@
 NAME = Bureaucrat
 
-CC = g++ 
+CC = c++ 
 
 fLAGS = -Wall -Wextra -Werror
 
