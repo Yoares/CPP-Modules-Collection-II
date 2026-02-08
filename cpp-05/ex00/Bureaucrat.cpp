@@ -4,15 +4,30 @@ Bureaucrat::Bureaucrat() : _name("Default"), _grade(150)
 {
     std::cout << "Bureaucrat Default constructor called" << std::endl;
 }
+
 Bureaucrat::~Bureaucrat()
 {
     std::cout << "Bureaucrat Destructor called" << std::endl;
+}
+
+Bureaucrat::Bureaucrat(const Bureaucrat& other){
+    std::cout << "Bureaucrat Copy constructor called" << std::endl;
+    *this = other;
+}
+
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other){
+    std::cout << "Bureaucrat Copy assignment operator called" << std::endl;
+    if (this != &other) {
+        _grade = other._grade; // Only copy the grade, name is const
+    }
+    return *this;
 }
 
 const std::string& Bureaucrat::getName() const
 {
     return this->_name;
 }
+
 int Bureaucrat::getGrade() const
 {
     return this->_grade;
