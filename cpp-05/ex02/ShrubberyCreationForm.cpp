@@ -38,10 +38,3 @@ void ShrubberyCreationForm::performExecute() const {
     outFile.close();
 }
 
-std::string ShrubberyCreationForm::getTarget() const{
-    return this->_target;
-}
-
-void ShrubberyCreationForm::setTarget(std::string& target){
-    this->_target = target;
-}

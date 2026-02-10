@@ -20,10 +20,3 @@ void PresidentialPardonForm::performExecute() const{
     std::cout << _target << "has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
 
-std::string PresidentialPardonForm::getTarget() const{
-    return this->_target;
-}
-
-void PresidentialPardonForm::setTarget(std::string& target){
-    this->_target = target;
-}

@@ -30,11 +30,3 @@ void RobotomyRequestForm::performExecute() const{
         std::cout << "Robotomy on " << _target << " failed." << std::endl;
     }
 }
-
-std::string RobotomyRequestForm::getTarget() const{
-    return this->_target;
-}
-
-void RobotomyRequestForm::setTarget(std::string& target){
-    this->_target = target;
-}
