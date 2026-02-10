@@ -19,7 +19,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 }
 
 void ShrubberyCreationForm::performExecute() const {
-     std::ofstream outFile(_target + "_shrubbery"); 
+    std::ofstream outFile((_target + "_shrubbery").c_str());
     if (!outFile) {
         std::cerr << "Error: Could not create output file." << std::endl;
         return;
