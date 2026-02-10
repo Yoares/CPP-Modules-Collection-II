@@ -5,15 +5,21 @@
 
 class RobotomyRequestForm : public AForm {
     private:
-        const std::string _target;
+        std::string _target;
+    
+    protected:
+        void performExecute() const;
+    
     public:
-        RobotomyRequestForm();
-        RobotomyRequestForm(const std::string& target);
-        RobotomyRequestForm(const RobotomyRequestForm& other);
-        RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
-        ~RobotomyRequestForm();
+    RobotomyRequestForm();
+    RobotomyRequestForm(const std::string& target);
+    RobotomyRequestForm(const RobotomyRequestForm& other);
+    RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
+    ~RobotomyRequestForm();
 
-        void execute(Bureaucrat const & executor) const;
+    std::string getTarget() const;
+    void setTarget(std::string& target);
+
 };
 
 #endif

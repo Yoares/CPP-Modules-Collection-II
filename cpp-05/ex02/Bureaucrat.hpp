@@ -40,6 +40,8 @@ public:
     public:
         virtual const char* what() const throw();
     };
+    //excute
+    void executeForm(AForm const & form) ;
 };
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& b);
 

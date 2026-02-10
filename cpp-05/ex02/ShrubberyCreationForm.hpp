@@ -5,7 +5,11 @@
 
 class ShrubberyCreationForm : public AForm {
     private:
-        const std::string _target;
+        std::string _target;
+    
+    protected:
+        void performExecute() const;
+    
     public:
         ShrubberyCreationForm();
         ShrubberyCreationForm(const std::string& target);
@@ -13,7 +17,8 @@ class ShrubberyCreationForm : public AForm {
         ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
         ~ShrubberyCreationForm();
 
-        void execute(Bureaucrat const & executor) const;
+        std::string getTarget() const;
+        void setTarget(std::string& target);
 };
 
 #endif
