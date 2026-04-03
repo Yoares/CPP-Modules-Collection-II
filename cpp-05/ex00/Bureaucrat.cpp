@@ -7,7 +7,6 @@ Bureaucrat::Bureaucrat() : _name("Default"), _grade(150)
 
 Bureaucrat::~Bureaucrat()
 {
-    std::cout << "Bureaucrat Destructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other){
@@ -65,7 +64,7 @@ const char* Bureaucrat::GradeTooHighException::what() const throw() {
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw() {
-    return "Grade is too Low! (Lower possible is 1)";
+    return "Grade is too low! (Lowest possible is 150)";
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& b) {

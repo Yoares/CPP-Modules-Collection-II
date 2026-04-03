@@ -20,7 +20,7 @@ RobotomyRequestForm::~RobotomyRequestForm() {}
 
 void RobotomyRequestForm::performExecute() const{
 
-    std::cout << "* VRRRRRRR... Drilling noises ... BZZZZZT *";
+    std::cout << "* VRRRRRRR... Drilling noises ... BZZZZZT *" << std::endl;
 
     if (std::rand() % 2 == 0)
     {
