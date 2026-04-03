@@ -10,7 +10,6 @@ class Intern {
 public:
     Intern();
     ~Intern();
-    // Copy/Assign...
 
     // The Factory Method
     AForm* makeForm(std::string formName, std::string target);

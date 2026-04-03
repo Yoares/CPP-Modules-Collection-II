@@ -1,66 +1,38 @@
-
-#include "Bureaucrat.hpp"
-#include "AForm.hpp"
 #include "Intern.hpp"
+#include "Bureaucrat.hpp"
 
+int main()
+{
+    Intern someRandomIntern;
+    Bureaucrat boss("Boss", 1);
 
-int main() {
-    // 1. Create the Factory Worker (The Intern)
-    Intern  someRandomIntern;
+    AForm* form1 = someRandomIntern.makeForm("robotomy request", "Bender");
+    AForm* form2 = someRandomIntern.makeForm("shrubbery creation", "home");
+    AForm* form3 = someRandomIntern.makeForm("presidential pardon", "Arthur");
+    AForm* form4 = someRandomIntern.makeForm("unknown form", "???");
 
-    // 2. Create the Boss (To sign/execute the forms)
-    Bureaucrat boss("The Boss", 1);
-
-    std::cout << "\n--- TEST 1: ROBOTOMY REQUEST ---" << std::endl;
+    if (form1)
     {
-        // The Intern creates the form on the Heap
-        AForm* rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-        
-        // We must check if rrf is not NULL (in case of typos)
-        if (rrf) {
-            boss.signForm(*rrf);
-            boss.executeForm(*rrf);
-            
-            // CLEANUP: The Intern created it with 'new', we must 'delete' it.
-            delete rrf;
-        }
+        boss.signForm(*form1);
+        boss.executeForm(*form1);
+        delete form1;
     }
 
-    std::cout << "\n--- TEST 2: SHRUBBERY CREATION ---" << std::endl;
+    if (form2)
     {
-        AForm* form = someRandomIntern.makeForm("shrubbery creation", "Home");
-        
-        if (form) {
-            boss.signForm(*form);
-            boss.executeForm(*form);
-            delete form;
-        }
+        boss.signForm(*form2);
+        boss.executeForm(*form2);
+        delete form2;
     }
 
-    std::cout << "\n--- TEST 3: PRESIDENTIAL PARDON ---" << std::endl;
+    if (form3)
     {
-        AForm* form = someRandomIntern.makeForm("presidential pardon", "Criminal");
-        
-        if (form) {
-            boss.signForm(*form);
-            boss.executeForm(*form);
-            delete form;
-        }
+        boss.signForm(*form3);
+        boss.executeForm(*form3);
+        delete form3;
     }
 
-    std::cout << "\n--- TEST 4: INVALID FORM (Handling Errors) ---" << std::endl;
-    {
-        // Try to ask for a form that doesn't exist
-        AForm* form = someRandomIntern.makeForm("make me coffee", "Boss");
-        
-        if (form) {
-            boss.signForm(*form);
-            delete form;
-        } else {
-            // This is expected
-            std::cout << "Main: The pointer is NULL, so we didn't crash!" << std::endl;
-        }
-    }
+    delete form4; // probably NULL, safe
 
     return 0;
 }

@@ -18,7 +18,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat& other){
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other){
     std::cout << "Bureaucrat Copy assignment operator called" << std::endl;
     if (this != &other) {
-        _grade = other._grade; // Only copy the grade, name is const
+        _grade = other._grade; 
     }
     return *this;
 }
@@ -34,20 +34,18 @@ int Bureaucrat::getGrade() const
 }
 
 void Bureaucrat::incrementGrade() {
-    if (_grade <= 1) { // Cannot go higher than 1
+    if (_grade <= 1) {
         throw GradeTooHighException();
     }
     _grade--;
 }
 
 void Bureaucrat::decrementGrade() {
-    if (_grade >= 150) { // Cannot go lower than 150
+    if (_grade >= 150) { 
         throw GradeTooLowException();
     }
     _grade++;
 }
-
-// Bureaucrat.cpp
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name) {
     

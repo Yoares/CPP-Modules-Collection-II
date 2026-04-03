@@ -1,5 +1,5 @@
 #include "AForm.hpp"
-#include "Bureaucrat.hpp" // Required to access Bureaucrat::getGrade()
+#include "Bureaucrat.hpp"
 
 // --- Constructors & Destructor ---
 
@@ -23,12 +23,9 @@ AForm::AForm(const AForm& other)
 
 AForm::~AForm() {}
 
-// --- Assignment Operator ---
 
 AForm& AForm::operator=(const AForm& other) {
     if (this != &other) {
-        // We can only copy the state (_isSigned).
-        // Const members (_name, grades) cannot be reassigned.
         this->_isSigned = other._isSigned;
     }
     return *this;
@@ -60,7 +57,6 @@ void AForm::beSigned(const Bureaucrat& b) {
 }
 
 void AForm::execute(const Bureaucrat& executor) const {
-    // Check 1: Is the form signed?
     if (!this->_isSigned) {
         throw NotSignedException();
     }
@@ -68,12 +64,8 @@ void AForm::execute(const Bureaucrat& executor) const {
     if (executor.getGrade() > this->_gradeToExecute) {
         throw GradeTooLowException();
     }
-
-    // If all checks pass, run the child class's specific action.
     this->performExecute();
 }
-
-// --- Exceptions ---
 
 const char* AForm::GradeTooHighException::what() const throw() {
     return "Grade is too high! (Highest possible is 1)";
@@ -86,8 +78,6 @@ const char* AForm::GradeTooLowException::what() const throw() {
 const char* AForm::NotSignedException::what() const throw() {
     return "Form is not signed!";
 }
-
-// --- Stream Operator ---
 
 std::ostream& operator<<(std::ostream& os, const AForm& f) {
     os << "Form: " << f.getName() 

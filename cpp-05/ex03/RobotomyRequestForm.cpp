@@ -1,6 +1,5 @@
 #include "RobotomyRequestForm.hpp"
-#include <cstdlib> // For rand() and srand()
-// #include <ctime>   // For time() if you seed here
+#include <cstdlib>
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45), _target("Default") {}
 
@@ -11,7 +10,7 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) : AFo
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& other) {
     if (this != &other) {
         AForm::operator=(other);
-        // _target is const, so we cannot assign to it. It must be initialized in the constructor.
+
     }
     return *this;
 }

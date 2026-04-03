@@ -27,18 +27,14 @@ public:
     int getGradeToSign() const;
     int getGradeToExecute() const;
 
-    // Main Functionality
     void beSigned(const Bureaucrat& b);
 
-    // Execution Logic (Template Method Pattern)
     void execute(const Bureaucrat& executor) const;
 
 protected:
-    // Abstract function for child classes to implement the actual action
     virtual void performExecute() const = 0;
 
 public:
-    // Custom Exceptions
     class GradeTooHighException : public std::exception {
     public:
         virtual const char* what() const throw();

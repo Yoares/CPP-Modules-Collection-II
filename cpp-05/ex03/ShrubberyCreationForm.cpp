@@ -13,7 +13,6 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other) {
     if (this != &other) {
         AForm::operator=(other);
-        // _target is const, so we cannot assign it. It should be initialized in the constructor only.
     }
     return *this;
 }

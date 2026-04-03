@@ -9,7 +9,6 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& oth
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& other) {
     if (this != &other) {
         AForm::operator=(other);
-        // _target is const, so we cannot assign to it. It must be initialized in the constructor.
     }
     return *this;
 }
