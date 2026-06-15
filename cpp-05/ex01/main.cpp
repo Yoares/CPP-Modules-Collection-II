@@ -4,10 +4,12 @@
 
 int main()
 {
-    Bureaucrat boss("Boss", 1);
-    Bureaucrat intern("Intern", 150);
+    try{
 
-    Form contract("Contract", 50, 25);
+    Bureaucrat boss("Boss", 1);
+    Bureaucrat intern("Intern", 90);
+
+    Form contract("Contract", 100, 10);
 
     std::cout << contract << std::endl;
 
@@ -15,6 +17,11 @@ int main()
     boss.signForm(contract);   // should succeed
 
     std::cout << contract << std::endl;
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
 
     return 0;
 }

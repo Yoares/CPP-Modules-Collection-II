@@ -1,5 +1,5 @@
 #include "AForm.hpp"
-#include "Bureaucrat.hpp" // Required to access Bureaucrat::getGrade()
+#include "Bureaucrat.hpp" 
 
 // --- Constructors & Destructor ---
 
@@ -27,8 +27,6 @@ AForm::~AForm() {}
 
 AForm& AForm::operator=(const AForm& other) {
     if (this != &other) {
-        // We can only copy the state (_isSigned).
-        // Const members (_name, grades) cannot be reassigned.
         this->_isSigned = other._isSigned;
     }
     return *this;
@@ -60,7 +58,6 @@ void AForm::beSigned(const Bureaucrat& b) {
 }
 
 void AForm::execute(const Bureaucrat& executor) const {
-    // Check 1: Is the form signed?
     if (!this->_isSigned) {
         throw NotSignedException();
     }
@@ -69,7 +66,6 @@ void AForm::execute(const Bureaucrat& executor) const {
         throw GradeTooLowException();
     }
 
-    // If all checks pass, run the child class's specific action.
     this->performExecute();
 }
 

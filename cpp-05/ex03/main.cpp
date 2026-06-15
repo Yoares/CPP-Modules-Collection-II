@@ -3,6 +3,7 @@
 
 int main()
 {
+    try {
     Intern someRandomIntern;
     Bureaucrat boss("Boss", 1);
 
@@ -32,7 +33,11 @@ int main()
         delete form3;
     }
 
-    delete form4; // probably NULL, safe
-
+    delete form4;
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
     return 0;
 }

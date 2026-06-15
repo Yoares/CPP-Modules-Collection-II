@@ -21,7 +21,9 @@ void RobotomyRequestForm::performExecute() const{
 
     std::cout << "* VRRRRRRR... Drilling noises ... BZZZZZT *" << std::endl;
 
-    if (std::rand() % 2 == 0)
+    std::srand(time(NULL)); // Seed for randomness
+
+    if (std::rand() % 2)
     {
         std::cout << _target << "has been robotomized successfully" << std::endl;
     }

@@ -5,6 +5,7 @@
 
 int main()
 {
+    try {
     Bureaucrat boss("Boss", 1);
     Bureaucrat low("Low", 150);
 
@@ -23,7 +24,13 @@ int main()
     boss.executeForm(pardon);
 
     // Failure case
+    low.signForm(shrub);
     low.executeForm(shrub);
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
 
     return 0;
 }
