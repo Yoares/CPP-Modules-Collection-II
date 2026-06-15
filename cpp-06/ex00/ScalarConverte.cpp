@@ -43,9 +43,10 @@ bool isFloat(std::string& s){
 }
 
 bool isInt(std::string& s){
-    bool plus = false;
-    bool minus = false;
-
+    bool sign = false;
+    std::string sign_s;
+    std::string body;
+    
     return false;
 }
 
