@@ -1,5 +1,6 @@
 #ifndef SCALARCONVERTE_HPP
 # define SCALARCONVERTE_HPP 
+
 #include <iostream> 
 #include <iomanip> 
 #include <string> 
@@ -18,6 +19,6 @@ class ScalarConverte {
         ScalarConverte &operator=(const ScalarConverte &copy); 
         ~ScalarConverte();
     public: 
-        static void convert(const std::string& str); 
+        static void convert(const std::string& str);      
 }; 
 #endif
