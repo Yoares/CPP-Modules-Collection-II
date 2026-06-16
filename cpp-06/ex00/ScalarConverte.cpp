@@ -30,25 +30,26 @@ ScalarConverte::~ScalarConverte()
 {
 }
 
-bool isPseudo(std::string& s){
+bool isPseudo(const std::string& s){
     return (s == "nan" || s == "nanf" || s == "+inf" || s == "-inf" || s == "+inff" || s == "-inff");
 }
 
-bool isChar(std::string& s){
+bool isChar(const std::string& s){
     return (s.size() == 1 && isprint(s[0]) && !isdigit(s[0]));
 }
 
-bool isFloat(std::string& s){
+bool isFloat(const std::string& s){
     if (s.empty() || s[s.length() - 1] != 'f')  
         return false;
-    if (s == "-inff" || s == "+inff" || s == "nanf") 
-        return true;
-    int = 0;
+
+    size_t i = 0;
     bool hasdigit = false;
     bool hasdot = false;
     if (s[i] == '+' || s[i] == '-')
         i++;
-    for (i < (int)s.length() - 1; i++){
+    if (i == s.length()) 
+        return false;
+    for (; i < s.length() - 1; i++){
         if (isdigit(s[i]))
             hasdigit = true;
         else if (s[i] == '.' && !hasdot)
@@ -59,27 +60,28 @@ bool isFloat(std::string& s){
     return hasdigit && hasdot;
 }
 
-bool isInt(std::string& s){
-    int i = 0;
+bool isInt(const std::string& s){
+    size_t i = 0;
     if (s[i] == '+' || s[i] == '-')
         i++;
     if (i == s.length()) 
         return false;
-    for (i < (int)s.size(); i++){
+    for (; i < s.size(); i++){
         if (!isdigit(s[i]))
             return false;
     }
     return true;
 }
 
-bool isDouble(std::string& s){
-    if (s == "-inf" || s == "+inf" || s == "nan") return true;
+bool isDouble(const std::string& s){
 
     size_t i = 0;
     bool hasDot = false;
     bool hasDigit = false;
     if (s[i] == '+' || s[i] == '-') i++;
-    for (i < s.length(); i++){
+    if (i == s.length()) 
+        return false;
+    for (; i < s.length(); i++){
         if (isdigit(s[i])) {   
             hasDigit = true;
         } else if (s[i] == '.' && !hasDot) {
