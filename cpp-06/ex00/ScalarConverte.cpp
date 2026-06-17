@@ -179,19 +179,20 @@ void ScalarConverte::convert(const std::string &str)
     }
     std::cout << std::endl;
     std::cout << "float: ";
-    if (type == PSEUDO || value < std::numeric_limits<float>::min() ||  value > std::numeric_limits<float>::max()){
+    if (type == PSEUDO || value < -std::numeric_limits<float>::max() ||  value > std::numeric_limits<float>::max()){
         std::cout << "impossible";
     }
     else{
-        std::cout << static_cast<float>(value);
+        float fValue =  static_cast<float>(value);
+        std::cout << std::fixed << std::setprecision(1) << fValue << "f" ;
     }
     std::cout << std::endl;
     std::cout << "double: ";
-    if (type == PSEUDO || value < std::numeric_limits<double>::min() ||  value > std::numeric_limits<double>::max()){
+    if (type == PSEUDO || value < -std::numeric_limits<double>::max() ||  value > std::numeric_limits<double>::max()){
         std::cout << "impossible";
     }
     else{
-        std::cout << static_cast<double>(value);
+        std::cout << std::fixed << std::setprecision(1) << value;
     }
     std::cout << std::endl;
 }
