@@ -30,83 +30,105 @@ ScalarConverte::~ScalarConverte()
 {
 }
 
-bool isPseudo(const std::string& s){
+bool isDecimal(const std::string &s, bool requireF)
+{
+
+    if (s.empty())
+        return false;
+    size_t pos = 0;
+    if (s[pos] == '-' || s[pos] == '+')
+        pos++;
+
+    if (pos == s.length())
+        return false;
+
+    size_t end = s.length();
+
+    if (requireF)
+    {
+        if (s[end - 1] != 'f')
+            return false;
+        end--;
+    }
+    else{
+        if (s[end - 1] == 'f')
+            return false;
+    }
+    if (pos >= end)
+        return false;
+
+    bool found_dot = false;
+    bool found_digit = false;
+    for(size_t i = pos; i < end; i++){
+        if(s[i] == '.')
+        {
+            if (found_dot)
+                return false;
+            found_dot = true;
+        }
+        else if (!std::isdigit(static_cast<unsigned char>(s[i]))){
+            return false;
+        }
+        else{
+            found_digit = true;
+        }
+    }
+    return found_dot && found_digit;
+}
+
+bool isPseudo(const std::string &s)
+{
     return (s == "nan" || s == "nanf" || s == "+inf" || s == "-inf" || s == "+inff" || s == "-inff");
 }
 
-bool isChar(const std::string& s){
+bool isChar(const std::string &s)
+{
     return (s.size() == 1 && isprint(s[0]) && !isdigit(s[0]));
 }
 
-bool isFloat(const std::string& s){
-    if (s.empty() || s[s.length() - 1] != 'f')  
-        return false;
-
-    size_t i = 0;
-    bool hasdigit = false;
-    bool hasdot = false;
-    if (s[i] == '+' || s[i] == '-')
-        i++;
-    if (i == s.length()) 
-        return false;
-    for (; i < s.length() - 1; i++){
-        if (isdigit(s[i]))
-            hasdigit = true;
-        else if (s[i] == '.' && !hasdot)
-            hasdot = true;
-        else
-            return false;
-    }
-    return hasdigit && hasdot;
-}
-
-bool isInt(const std::string& s){
+bool isInt(const std::string &s)
+{
     size_t i = 0;
     if (s[i] == '+' || s[i] == '-')
         i++;
-    if (i == s.length()) 
+    if (i == s.length())
         return false;
-    for (; i < s.size(); i++){
+    for (; i < s.size(); i++)
+    {
         if (!isdigit(s[i]))
             return false;
     }
     return true;
 }
 
-bool isDouble(const std::string& s){
-
-    size_t i = 0;
-    bool hasDot = false;
-    bool hasDigit = false;
-    if (s[i] == '+' || s[i] == '-') i++;
-    if (i == s.length()) 
-        return false;
-    for (; i < s.length(); i++){
-        if (isdigit(s[i])) {   
-            hasDigit = true;
-        } else if (s[i] == '.' && !hasDot) {
-            hasDot = true;
-        } else {
-            return false;
-        }
-    }
-    return hasDigit && hasDot;
+bool isFloat(const std::string &s)
+{
+    return (isDecimal(s, true));
 }
 
-Type dectecType(const std::string& str){
+bool isDouble(const std::string &s)
+{
+    return (isDecimal(s, false));
+}
+
+Type dectecType(const std::string &str)
+{
 
     std::string s = str;
 
     if (s.empty())
         return INVALID;
 
-    if (isPseudo(s)){
+    if (isPseudo(s))
+    {
         return PSEUDO;
     }
-    if (s.size() == 1 && isChar(s)){
+    if (s.size() == 1 && isChar(s))
+    {
         return CHAR;
     }
-    if (isInt(s)){
+    if (isInt(s))
+    {
         return INT;
     }
     if (isFloat(s))
@@ -117,18 +139,59 @@ Type dectecType(const std::string& str){
     {
         return DOUBLE;
     }
-    
+
     return INVALID;
 }
 
-void ScalarConverte::convert(const std::string& str)
+void ScalarConverte::convert(const std::string &str)
 {
     Type type = dectecType(str);
-    if (type == INVALID) {
+    if (type == INVALID)
+    {
         std::cout << "char: impossible\nint: impossible\n"
                   << "float: impossible\ndouble: impossible" << std::endl;
         return;
     }
-    
+    double value = 0.0;
+    if (type == CHAR){
+        value = static_cast<double>(str[0]);
+    }else{
+        value = std::strtod(str.c_str(), NULL);
+    }
 
+    std::cout << "char: ";
+    if (type == PSEUDO || value < std::numeric_limits<char>::min() || value > std::numeric_limits<char>::max()){
+       std::cout << "impossible";
+    }
+    else if (!std::isprint(static_cast<char>(value))) {
+        std::cout << "Non displayable";
+    }
+    else{
+        std::cout << static_cast<char>(value);
+    }
+    std::cout << std::endl;
+    std::cout << "int: ";
+    if (type == PSEUDO || value < std::numeric_limits<int>::min() ||  value > std::numeric_limits<int>::max()){
+        std::cout << "impossible";
+    }
+    else{
+        std::cout << static_cast<int>(value);
+    }
+    std::cout << std::endl;
+    std::cout << "float: ";
+    if (type == PSEUDO || value < std::numeric_limits<float>::min() ||  value > std::numeric_limits<float>::max()){
+        std::cout << "impossible";
+    }
+    else{
+        std::cout << static_cast<float>(value);
+    }
+    std::cout << std::endl;
+    std::cout << "double: ";
+    if (type == PSEUDO || value < std::numeric_limits<double>::min() ||  value > std::numeric_limits<double>::max()){
+        std::cout << "impossible";
+    }
+    else{
+        std::cout << static_cast<double>(value);
+    }
+    std::cout << std::endl;
 }
