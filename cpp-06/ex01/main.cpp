@@ -1,6 +1,5 @@
 #include "Serialize.hpp"
 
-
 int main(){
 
     Data My_data = {42, "yasser"};
