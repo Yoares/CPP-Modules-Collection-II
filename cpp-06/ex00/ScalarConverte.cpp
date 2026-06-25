@@ -103,11 +103,15 @@ bool isInt(const std::string &s)
 
 bool isFloat(const std::string &s)
 {
+    if (s == "-inff" || s == "+inff" || s == "nanf")
+        return true;
     return (isDecimal(s, true));
 }
 
 bool isDouble(const std::string &s)
 {
+    if (s == "-inf" || s == "+inf" || s == "nan")
+        return true;
     return (isDecimal(s, false));
 }
 
@@ -152,6 +156,23 @@ void ScalarConverte::convert(const std::string &str)
                   << "float: impossible\ndouble: impossible" << std::endl;
         return;
     }
+
+    if (PSEUDO){
+        std::cout << "char: impossible\n";
+        std::cout << "int: impossible\n";
+        
+        if (str == "nan" || str == "nanf") {
+            std::cout << "float: nanf\n";
+            std::cout << "double: nan\n";
+        } else if (str == "+inf" || str == "+inff") {
+            std::cout << "float: +inff\n";
+            std::cout << "double: +inf\n";
+        } else if (str == "-inf" || str == "-inff") {
+            std::cout << "float: -inff\n";
+            std::cout << "double: -inf\n";
+        }
+        return;
+    }
     double value = 0.0;
     if (type == CHAR){
         value = static_cast<double>(str[0]);
@@ -179,7 +200,7 @@ void ScalarConverte::convert(const std::string &str)
     }
     std::cout << std::endl;
     std::cout << "float: ";
-    if (type == PSEUDO || value < -std::numeric_limits<float>::max() ||  value > std::numeric_limits<float>::max()){
+    if (value < -std::numeric_limits<float>::max() ||  value > std::numeric_limits<float>::max()){
         std::cout << "impossible";
     }
     else{
@@ -188,7 +209,7 @@ void ScalarConverte::convert(const std::string &str)
     }
     std::cout << std::endl;
     std::cout << "double: ";
-    if (type == PSEUDO || value < -std::numeric_limits<double>::max() ||  value > std::numeric_limits<double>::max()){
+    if (value < -std::numeric_limits<double>::max() ||  value > std::numeric_limits<double>::max()){
         std::cout << "impossible";
     }
     else{
