@@ -7,7 +7,7 @@ template <typename T>
 void swap (T val1, T val2){
     T temp = val1;
     val1 = val2;
-    val2 = val1;
+    val2 = temp;
 }
 
 template <typename T> 
