@@ -16,6 +16,14 @@ class Span{
         void addNumber(int n);
         int shortestSpan() const;
         int longestSpan() const;
+
+        template <typename Iterator>
+        void addRange(Iterator begin, Iterator end){
+            if (_nums.size() + std::distance(begin, end) > max_size)
+                throw std::runtime_error("Span is full");
+            _nums.insert(_nums.end(), begin, end);
+        }
+
     private:
         unsigned int max_size;
         std::vector<int> _nums;

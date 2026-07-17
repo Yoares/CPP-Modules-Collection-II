@@ -22,24 +22,24 @@ int main()
 
     std::cout << "------------------------" << std::endl;
 
-    // try
-    // {
-    //     Span big(10000);
+    try
+    {
+        Span big(10000);
 
-    //     std::vector<int> numbers;
+        std::vector<int> numbers;
 
-    //     for (int i = 0; i < 10000; i++)
-    //         numbers.push_back(rand());
+        for (int i = 0; i < 10000; i++)
+            numbers.push_back(rand());
 
-    //     big.addRange(numbers.begin(), numbers.end());
+        big.addRange(numbers.begin(), numbers.end());
 
-    //     std::cout << "Shortest: " << big.shortestSpan() << std::endl;
-    //     std::cout << "Longest : " << big.longestSpan() << std::endl;
-    // }
-    // catch (std::exception& e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
+        std::cout << "Shortest: " << big.shortestSpan() << std::endl;
+        std::cout << "Longest : " << big.longestSpan() << std::endl;
+    }
+    catch (std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+    }
 
     return 0;
 }
